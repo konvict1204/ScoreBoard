@@ -1,6 +1,6 @@
-import entity.Player;
-import repository.MatchRepo;
-import repository.PlayerRepo;
+import project.entity.Player;
+import project.repository.MatchRepo;
+import project.repository.PlayerRepo;
 
 public class Start {
     public static void main(String[] args) {

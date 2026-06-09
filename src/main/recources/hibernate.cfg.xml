@@ -13,8 +13,8 @@
     <property name="show_sql">true</property>
     <property name="format_sql">true</property>
 
-    <mapping class="entity.Match"/>
-    <mapping class="entity.Player"/>
+    <mapping class="project.entity.Match"/>
+    <mapping class="project.entity.Player"/>
 
 
     <!-- <property name="connection.username"/> -->

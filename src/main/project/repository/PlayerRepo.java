@@ -1,8 +1,10 @@
-package repository;
+package project.repository;
 
-import entity.Player;
+
 import org.hibernate.Session;
-import util.PoolManager;
+import org.hibernate.query.SelectionQuery;
+import project.entity.Player;
+import project.util.PoolManager;
 
 import java.util.List;
 import java.util.Optional;
@@ -27,33 +29,32 @@ public class PlayerRepo {
     }
 
 
-    public Player findByName(String playerName) {
-        Player player;
+    public Optional<Player> findByName(String player) {
+        Player maybePlayer = null;
+
         try(Session session = PoolManager.getSession()) {
             session.beginTransaction();
+            String query = "SELECT p FROM Player p WHERE p.name = :player";
 
-            player = session.get(Player.class, playerName);
+            maybePlayer = session.createQuery(query, Player.class)
+                    .setParameter("player", player)
+                    .uniqueResult();
 
             session.getTransaction().commit();
         }
-        return player;
+
+        return Optional.ofNullable(maybePlayer);
     }
 
-    public Integer persist(Player player) {
+    public void persist(Player player) {
         try(Session session = PoolManager.getSession()) {
             session.beginTransaction();
 
             session.persist(player);
-            List<Player> ls = session.createQuery("SELECT u FROM Player u", Player.class).getResultList();
-            ls.forEach(System.out::println);
-
-
 
             session.getTransaction().commit();
-
         }
 
-        return player.getId();
     }
 
     public static PlayerRepo getInstance() {

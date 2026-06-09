@@ -1,15 +1,21 @@
-package entity;
+package project.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.ToString;
+import lombok.*;
 
 
 @Data
 @ToString
+@EqualsAndHashCode
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "players")
 public class Player {
+
+    public Player(String name) {
+        this.name = name;
+    }
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)

@@ -1,9 +1,8 @@
-package repository;
+package project.repository;
 
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.junit.jupiter.api.AfterEach;
-import util.PoolManager;
+import project.util.PoolManager;
 
 public class PlayerRepoBaseITTest {
 
@@ -12,7 +11,7 @@ public class PlayerRepoBaseITTest {
         try (Session session = PoolManager.getSession()) {
             session.beginTransaction();
             session.createNativeMutationQuery(
-                    "TRUNCATE TABLE players RESTART IDENTITY"
+                    "TRUNCATE TABLE matches RESTART IDENTITY"
             ).executeUpdate();
             session.getTransaction().commit();
         }
