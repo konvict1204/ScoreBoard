@@ -11,7 +11,8 @@ public class PlayerRepoBaseITTest {
         try (Session session = PoolManager.getSession()) {
             session.beginTransaction();
             session.createNativeMutationQuery(
-                    "TRUNCATE TABLE matches RESTART IDENTITY"
+                    "DELETE FROM players;" +
+                            "ALTER TABLE players ALTER COLUMN id RESTART WITH 1;"
             ).executeUpdate();
             session.getTransaction().commit();
         }

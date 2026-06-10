@@ -10,10 +10,11 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class PlayerRepoITTest extends PlayerRepoBaseITTest {
     PlayerRepo playerRepo;
-    Player player = new Player("Player");
+
 
     @Test
     void findByName(){
+        Player player = new Player("Player");
         playerRepo = PlayerRepo.getInstance();
         playerRepo.persist(player);
 
@@ -26,6 +27,7 @@ public class PlayerRepoITTest extends PlayerRepoBaseITTest {
 
     @Test
     void persistHP(){
+        Player player = new Player("Player");
         playerRepo = PlayerRepo.getInstance();
 
         playerRepo.persist(player);
