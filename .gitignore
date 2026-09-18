@@ -31,6 +31,8 @@ target/
 build/
 !**/src/main/**/build/
 !**/src/test/**/build/
+src/main/database.sql
+src/main/db
 
 ### VS Code ###
 .vscode/
