@@ -17,4 +17,7 @@ public class PoolManager {
     public static Session getSession() {
         return sessionFactory.openSession();
     }
+    public static void closeSession(){
+        sessionFactory.close();
+    }
 }

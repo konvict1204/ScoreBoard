@@ -1,0 +1,10 @@
+@import "def.css";
+button {
+    display: block;
+    background-color: cornsilk;
+    width: 30vw;
+    height: 5vh;
+    margin: 2vh auto auto;
+    border-radius: 10px;
+    font-style: oblique;
+}

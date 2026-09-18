@@ -4,23 +4,17 @@
     "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
   <session-factory>
-    <property name="connection.url">jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;MODE=PostgreSQL</property>
-    <property name="connection.username">admin</property>
-    <property name="connection.password">admin</property>
-    <property name="connection.driver_class">org.h2.Driver</property>
+    <property name="connection.url">jdbc:postgresql://localhost:5432/score_board</property>
+    <property name="connection.username">postgres</property>
+    <property name="connection.password">1</property>
+    <property name="connection.driver_class">org.postgresql.Driver</property>
     <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
-    <property name="hibernate.hbm2ddl.auto">update</property>
+    <property name="hibernate.hbm2ddl.auto">create</property>
     <property name="show_sql">true</property>
     <property name="format_sql">true</property>
 
-    <mapping class="project.entity.Match"/>
-    <mapping class="project.entity.Player"/>
+    <mapping class="project.entity.MatchEntity"/>
+    <mapping class="project.entity.PlayerEntity"/>
 
-
-    <!-- <property name="connection.username"/> -->
-    <!-- <property name="connection.password"/> -->
-
-    <!-- DB schema will be updated if needed -->
-    <!-- <property name="hibernate.hbm2ddl.auto">update</property> -->
   </session-factory>
 </hibernate-configuration>

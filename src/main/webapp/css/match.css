@@ -1,0 +1,82 @@
+@import "def.css";
+
+.header{
+    display: flex;
+    justify-content: center;
+}
+table {
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 640px;
+    margin: 40px auto;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #111;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.4);
+}
+
+thead th {
+    background: #111;
+    color: #9a9a9a;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 14px 10px;
+    border-bottom: 2px solid #ccff00;
+}
+
+tbody th {
+    padding: 14px 10px;
+    text-align: center;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 500;
+    border-bottom: 1px solid #262626;
+}
+
+/* Имя игрока — жирным и слева */
+tbody th:first-child {
+    text-align: left;
+    font-weight: 700;
+    padding-left: 16px;
+}
+
+/* Очки — акцентная "табло" ячейка */
+tbody th:nth-child(4) {
+    font-family: 'Courier New', monospace;
+    font-size: 20px;
+    font-weight: 700;
+    color: #ccff00;
+    text-shadow: 0 0 6px rgba(204, 255, 0, 0.5);
+}
+
+tbody tr:last-child th {
+    border-bottom: none;
+}
+
+tbody tr:hover {
+    background: #1c1c1c;
+}
+
+/* Кнопка */
+tbody button {
+    padding: 8px 18px;
+    border: none;
+    border-radius: 6px;
+    background: #2563eb;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s ease, transform 0.1s ease;
+}
+
+tbody button:hover {
+    background: #1d4ed8;
+}
+
+tbody button:active {
+    transform: scale(0.96);
+}

@@ -1,29 +1,60 @@
 package project.repository;
 
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
-import project.entity.Match;
-import project.entity.Player;
+import project.entity.MatchEntity;
+import project.entity.PlayerEntity;
+import project.util.PoolManager;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class MatchRepoITTest {
-    MatchRepo matchRepo = MatchRepo.getInstance();
-    PlayerRepo playerRepo = PlayerRepo.getInstance();
-    Player player1 = new Player("Player1");
-    Player player2 = new Player("Player2");
-    Match match = new Match(player1, player2);
+    MatchRepo matchRepo;
+    PlayerRepo playerRepo;
 
-    {
-        playerRepo.persist(player1);
-        playerRepo.persist(player2);
+    public MatchRepoITTest() {
+        this.matchRepo = new MatchRepo();
+        this.playerRepo = new PlayerRepo();
     }
 
+    @AfterEach
+    public void tearDown() {
+        try(Session session = PoolManager.getSession()){
+            Transaction transaction = session.beginTransaction();
+            session.createNativeQuery("""
+        TRUNCATE TABLE matches
+        RESTART IDENTITY CASCADE
+        """).execute();
+            transaction.commit();
 
+        }
+    }
 
     @Test
-    void persistHP() {
-        matchRepo.persist(match);
+    public void persistTest() {
+        PlayerEntity firstPlayer = new PlayerEntity("John");
+        PlayerEntity secondPlayer = new PlayerEntity("Jack");
+        playerRepo.persist(firstPlayer);
+        playerRepo.persist(secondPlayer);
+        MatchEntity m = new MatchEntity(firstPlayer,secondPlayer,firstPlayer);
+        matchRepo.persist(m);
 
-        assertThat(match.getId()).isEqualTo(1);
+        assertThat(m.getId()).isEqualTo(1);
     }
+    @Test
+    public void countMatches() {
+        PlayerEntity firstPlayer = new PlayerEntity("John");
+        PlayerEntity secondPlayer = new PlayerEntity("Jack");
+        playerRepo.persist(firstPlayer);
+        playerRepo.persist(secondPlayer);
+        MatchEntity m = new MatchEntity(firstPlayer,secondPlayer,firstPlayer);
+        matchRepo.persist(m);
+
+        Long l = matchRepo.countMatches();
+
+        assertThat(l).isEqualTo(1);
+    }
+
 }

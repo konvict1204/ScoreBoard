@@ -1,34 +1,36 @@
 package project.repository;
 
 
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
-import project.entity.Player;
-
-import java.util.Optional;
+import project.entity.PlayerEntity;
+import project.util.PoolManager;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-public class PlayerRepoITTest extends PlayerRepoBaseITTest {
+public class PlayerRepoITTest {
     PlayerRepo playerRepo;
 
 
-    @Test
-    void findByName(){
-        Player player = new Player("Player");
-        playerRepo = PlayerRepo.getInstance();
-        playerRepo.persist(player);
+    @AfterEach
+    public void tearDown() {
+        try(Session session = PoolManager.getSession()){
+            Transaction transaction = session.beginTransaction();
+            session.createNativeQuery("""
+        TRUNCATE TABLE players
+        RESTART IDENTITY CASCADE
+        """).execute();
+            transaction.commit();
 
-        Optional<Player> maybePlayer = playerRepo.findByName(player.getName());
-
-        assertThat(maybePlayer).isPresent();
-        assertThat(maybePlayer.get().getName()).isEqualTo(player.getName());
-
+        }
     }
 
     @Test
-    void persistHP(){
-        Player player = new Player("Player");
-        playerRepo = PlayerRepo.getInstance();
+    void persistHappyCase(){
+        PlayerEntity player = new PlayerEntity("Jack");
+        playerRepo = new PlayerRepo();
 
         playerRepo.persist(player);
 

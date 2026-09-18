@@ -1,6 +1,6 @@
 CREATE TABLE players (
     id SERIAL PRIMARY KEY,
-    name VARCHAR(32)
+    name VARCHAR(32) UNIQUE
 );
 CREATE TABLE matches (
     id SERIAL PRIMARY KEY,

@@ -1,0 +1,17 @@
+body {
+    background-image: url("../desperate.jpg");
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center center;
+}
+h1{
+    font-family: "Times New Roman", serif;
+    color: crimson;
+    align-items: center;
+    font-size: 5vw;
+    text-align: center;
+}
